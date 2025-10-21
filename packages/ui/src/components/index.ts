@@ -1,2 +1,1 @@
-// UI components will be added here
-export {};
+export { Button, buttonVariants, type ButtonProps } from "./button";
