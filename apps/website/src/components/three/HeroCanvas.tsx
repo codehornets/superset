@@ -55,10 +55,10 @@ function LitBackground() {
 			{/* Point light that follows mouse */}
 			<pointLight
 				ref={lightRef}
-				intensity={20}
-				color="#ffffff"
-				distance={6}
-				decay={1.5}
+				intensity={4}
+				color="#ff9999"
+				distance={15}
+				decay={0.4}
 			/>
 		</>
 	);
