@@ -1,125 +1,335 @@
+"use client";
+
 import { Card } from "@superset/ui/card";
+import { motion } from "framer-motion";
 import { FadeUp } from "@/components/motion/FadeUp";
 import { HeroParallax } from "@/components/motion/HeroParallax";
 import { TiltCard } from "@/components/motion/TiltCard";
 import { HeroCanvas } from "@/components/three/HeroCanvas";
 
-// Feature cards data
-const FEATURES = [
-    {
-        title: "Framer Motion",
-        description:
-            "Smooth, production-ready animations for hover, scroll-reveal, and route transitions. DOM-based for optimal performance.",
-        delay: 0.1,
-    },
-    {
-        title: "React Three Fiber",
-        description:
-            "Optional lightweight 3D elements for hero sections and product showcases. WebGL-powered visual depth.",
-        delay: 0.2,
-    },
-    {
-        title: "Clean Architecture",
-        description:
-            "Composable, maintainable components. 95% DOM-based interactions with strategic 3D enhancements.",
-        delay: 0.3,
-    },
-] as const;
-
 // Client logos data
 const CLIENT_LOGOS = [
-    { name: "OpenAI", logo: "OpenAI" },
-    { name: "Cash App", logo: "Cash App" },
-    { name: "Scale", logo: "scale" },
-    { name: "Ramp", logo: "ramp" },
-    { name: "Vercel", logo: "Vercel" },
-    { name: "Coinbase", logo: "coinbase" },
-    { name: "BOOM", logo: "BOOM" },
-    { name: "Cursor", logo: "CURSOR" },
+	{ name: "OpenAI", logo: "OpenAI" },
+	{ name: "Cash App", logo: "Cash App" },
+	{ name: "Scale", logo: "scale" },
+	{ name: "Ramp", logo: "ramp" },
+	{ name: "Vercel", logo: "Vercel" },
+	{ name: "Coinbase", logo: "coinbase" },
+	{ name: "BOOM", logo: "BOOM" },
+	{ name: "Cursor", logo: "CURSOR" },
+] as const;
+
+// Scale features data
+const SCALE_FEATURES = [
+	{
+		title: "Analytics & insights",
+		description: "Track traffic, measure performance, and monitor conversions.",
+		link: "Learn more",
+	},
+	{
+		title: "A/B Testing & optimization",
+		description: "A/B testing, funnels, and built-in growth insights.",
+		link: "Learn more",
+	},
+	{
+		title: "SEO & performance",
+		description:
+			"Optimize every page with built-in SEO settings, metadata, and blazing-fast hosting.",
+		link: "Learn more",
+	},
 ] as const;
 
 // Hero section component
 function HeroSection() {
-    return (
-        <HeroParallax className="relative min-h-screen flex items-center justify-center overflow-hidden pointer-events-none">
-            <div className="absolute inset-0 z-0">
-                <HeroCanvas className="w-full h-full" />
-                <div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/30 to-black" />
-            </div>
+	return (
+		<HeroParallax className="relative min-h-screen flex items-center justify-center overflow-hidden pointer-events-none">
+			<div className="absolute inset-0 z-0">
+				<HeroCanvas className="w-full h-full" />
+				<div className="absolute inset-0 bg-linear-to-b from-black/0 via-black/30 to-black" />
+			</div>
 
-            <div className="relative z-10 px-8 text-center text-white flex flex-col items-center justify-center gap-4 mt-[30rem]">
-                <FadeUp>
-                    <h1 className="text-[14rem] font-bold leading-none -mt-16">
-                        Superset
-                    </h1>
-                </FadeUp>
-                <FadeUp delay={0.2}>
-                    <h2 className="text-2xl font-thin">
-                        The last app you'll ever need
-                    </h2>
-                </FadeUp>
-            </div>
-        </HeroParallax>
-    );
+			<div className="relative z-10 px-8 text-center text-white flex flex-col items-center justify-center gap-4 mt-[30rem]">
+				<FadeUp>
+					<h1 className="text-[14rem] font-bold leading-none -mt-16">
+						Superset
+					</h1>
+				</FadeUp>
+				<FadeUp delay={0.2}>
+					<h2 className="text-2xl font-thin">The last app you'll ever need</h2>
+				</FadeUp>
+			</div>
+		</HeroParallax>
+	);
 }
 
 // Feature card component
 interface FeatureCardProps {
-    title: string;
-    description: string;
-    delay: number;
+	title: string;
+	description: string;
+	delay: number;
 }
 
 function FeatureCard({ title, description, delay }: FeatureCardProps) {
-    return (
-        <FadeUp delay={delay}>
-            <TiltCard>
-                <Card className="p-8 h-full hover:shadow-2xl transition-shadow bg-zinc-900 border-zinc-800">
-                    <h3 className="text-2xl font-semibold mb-4 text-white">{title}</h3>
-                    <p className="text-zinc-400">{description}</p>
-                </Card>
-            </TiltCard>
-        </FadeUp>
-    );
+	return (
+		<FadeUp delay={delay}>
+			<TiltCard>
+				<Card className="p-8 h-full hover:shadow-2xl transition-shadow bg-zinc-900 border-zinc-800">
+					<h3 className="text-2xl font-semibold mb-4 text-white">{title}</h3>
+					<p className="text-zinc-400">{description}</p>
+				</Card>
+			</TiltCard>
+		</FadeUp>
+	);
 }
 
 // Client logos section component
 function ClientLogosSection() {
-    return (
-        <section className="py-24 px-8 bg-black border-y border-zinc-800">
-            <div className="max-w-7xl mx-auto">
-                <FadeUp>
-                    <h2 className="text-2xl font-normal text-center mb-8 text-white">
-                        Powering the world's best product teams.
-                    </h2>
-                    <p className="text-lg text-center mb-16 text-zinc-400">
-                        From next-gen startups to established enterprises.
-                    </p>
-                </FadeUp>
+	return (
+		<section className="py-24 px-8 bg-black border-y border-zinc-800">
+			<div className="max-w-7xl mx-auto">
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-100px" }}
+					transition={{ duration: 0.5, ease: "easeOut" }}
+				>
+					<h2 className="text-2xl font-normal text-center mb-8 text-white">
+						Powering the world's best product teams.
+					</h2>
+					<p className="text-lg text-center mb-16 text-zinc-400">
+						From next-gen startups to established enterprises.
+					</p>
+				</motion.div>
 
-                <FadeUp delay={0.2}>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center">
-                        {CLIENT_LOGOS.map((client) => (
-                            <div
-                                key={client.name}
-                                className="text-white text-2xl md:text-3xl font-semibold opacity-60 hover:opacity-100 transition-opacity"
-                            >
-                                {client.logo}
-                            </div>
-                        ))}
-                    </div>
-                </FadeUp>
-            </div>
-        </section>
-    );
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-100px" }}
+					transition={{ duration: 0.5, delay: 0.2 }}
+				>
+					<div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 items-center justify-items-center">
+						{CLIENT_LOGOS.map((client, index) => (
+							<motion.div
+								key={client.name}
+								className="text-white text-2xl md:text-3xl font-semibold opacity-60 hover:opacity-100 transition-opacity cursor-pointer"
+								whileHover={{ scale: 1.05 }}
+								transition={{ duration: 0.2 }}
+							>
+								{client.logo}
+							</motion.div>
+						))}
+					</div>
+				</motion.div>
+			</div>
+		</section>
+	);
+}
+
+// Scale features section component
+function ScaleFeaturesSection() {
+	return (
+		<section className="py-24 px-8 bg-black">
+			<div className="max-w-7xl mx-auto">
+				<motion.div
+					initial={{ opacity: 0, y: 20 }}
+					whileInView={{ opacity: 1, y: 0 }}
+					viewport={{ once: true, margin: "-100px" }}
+					transition={{ duration: 0.5, ease: "easeOut" }}
+				>
+					<h2 className="text-5xl md:text-6xl font-bold mb-16 text-white">
+						Scale without
+						<br />
+						switching tools
+					</h2>
+				</motion.div>
+
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					{/* Analytics Card */}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, margin: "-100px" }}
+						transition={{ duration: 0.5, delay: 0.1 }}
+						whileHover={{ y: -8, transition: { duration: 0.2 } }}
+					>
+						<Card className="p-8 bg-zinc-950 border-zinc-800 rounded-3xl h-full min-h-[400px] flex flex-col justify-between transition-shadow hover:shadow-2xl hover:shadow-blue-500/10 hover:border-zinc-700">
+							<div>
+								<h3 className="text-2xl font-semibold mb-3 text-white">
+									{SCALE_FEATURES[0].title}
+								</h3>
+								<p className="text-zinc-400 mb-6">
+									{SCALE_FEATURES[0].description}
+								</p>
+								<a
+									href="#"
+									className="text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+								>
+									{SCALE_FEATURES[0].link}
+									<motion.span
+										className="inline-block"
+										whileHover={{ x: 4 }}
+										transition={{ duration: 0.2 }}
+									>
+										→
+									</motion.span>
+								</a>
+							</div>
+							{/* Analytics Chart Placeholder */}
+							<div className="mt-8 p-6 bg-zinc-900 rounded-2xl border border-zinc-800">
+								<div className="mb-4">
+									<h4 className="text-white font-semibold mb-2">Overview</h4>
+									<div className="flex gap-8">
+										<div>
+											<div className="text-zinc-400 text-sm">Live Visitors</div>
+											<div className="text-white text-2xl font-bold">414</div>
+										</div>
+										<div>
+											<div className="text-zinc-400 text-sm">
+												Unique Visitors
+											</div>
+											<div className="text-white text-2xl font-bold">1.7M</div>
+										</div>
+										<div>
+											<div className="text-zinc-400 text-sm">
+												Total Pageviews
+											</div>
+											<div className="text-white text-2xl font-bold">3.2M</div>
+										</div>
+									</div>
+								</div>
+								<div className="h-32 bg-gradient-to-t from-blue-500/10 to-transparent rounded-lg" />
+							</div>
+						</Card>
+					</motion.div>
+
+					{/* A/B Testing Card */}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, margin: "-100px" }}
+						transition={{ duration: 0.5, delay: 0.2 }}
+						whileHover={{ y: -8, transition: { duration: 0.2 } }}
+					>
+						<Card className="p-8 bg-zinc-950 border-zinc-800 rounded-3xl h-full min-h-[400px] flex flex-col justify-between relative overflow-hidden transition-shadow hover:shadow-2xl hover:shadow-blue-500/10 hover:border-zinc-700">
+							<div>
+								<h3 className="text-2xl font-semibold mb-3 text-white">
+									{SCALE_FEATURES[1].title}
+								</h3>
+								<p className="text-zinc-400 mb-6">
+									{SCALE_FEATURES[1].description}
+								</p>
+								<a
+									href="#"
+									className="text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+								>
+									{SCALE_FEATURES[1].link}
+									<motion.span
+										className="inline-block"
+										whileHover={{ x: 4 }}
+										transition={{ duration: 0.2 }}
+									>
+										→
+									</motion.span>
+								</a>
+							</div>
+							{/* A/B Testing Interface Mockup */}
+							<div className="mt-8 relative">
+								<div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/20 rounded-full blur-3xl" />
+								<div className="relative p-4 bg-zinc-900 rounded-2xl border border-zinc-800">
+									<div className="text-xs text-zinc-400 mb-2">
+										Version Control
+									</div>
+									<div className="space-y-2">
+										<div className="p-2 bg-zinc-800 rounded text-white text-sm">
+											Version A
+										</div>
+										<div className="p-2 bg-blue-500/20 border border-blue-500/50 rounded text-white text-sm">
+											Version B ✓
+										</div>
+									</div>
+								</div>
+							</div>
+						</Card>
+					</motion.div>
+
+					{/* SEO Card - Takes full width on last row */}
+					<motion.div
+						initial={{ opacity: 0, y: 20 }}
+						whileInView={{ opacity: 1, y: 0 }}
+						viewport={{ once: true, margin: "-100px" }}
+						transition={{ duration: 0.5, delay: 0.3 }}
+						whileHover={{ y: -8, transition: { duration: 0.2 } }}
+						className="md:col-span-2"
+					>
+						<Card className="p-8 bg-zinc-950 border-zinc-800 rounded-3xl h-full min-h-[400px] flex flex-col md:flex-row gap-8 justify-between transition-shadow hover:shadow-2xl hover:shadow-green-500/10 hover:border-zinc-700">
+							<div className="flex-1">
+								<h3 className="text-2xl font-semibold mb-3 text-white">
+									{SCALE_FEATURES[2].title}
+								</h3>
+								<p className="text-zinc-400 mb-6">
+									{SCALE_FEATURES[2].description}
+								</p>
+								<a
+									href="#"
+									className="text-zinc-400 hover:text-white transition-colors inline-flex items-center gap-2 group"
+								>
+									{SCALE_FEATURES[2].link}
+									<motion.span
+										className="inline-block"
+										whileHover={{ x: 4 }}
+										transition={{ duration: 0.2 }}
+									>
+										→
+									</motion.span>
+								</a>
+							</div>
+							{/* Google Lighthouse Score Mockup */}
+							<div className="flex-1 flex items-center justify-center">
+								<div className="p-6 bg-zinc-900 rounded-2xl border border-zinc-800 w-full">
+									<div className="text-center mb-4">
+										<div className="text-sm text-zinc-400 mb-2">
+											Google Lighthouse
+										</div>
+										<div className="flex justify-center gap-6">
+											<div className="text-center">
+												<div className="w-16 h-16 rounded-full border-4 border-green-500 flex items-center justify-center text-white font-bold mb-1">
+													99
+												</div>
+												<div className="text-xs text-zinc-400">SEO</div>
+											</div>
+											<div className="text-center">
+												<div className="w-16 h-16 rounded-full border-4 border-green-500 flex items-center justify-center text-white font-bold mb-1">
+													100
+												</div>
+												<div className="text-xs text-zinc-400">Performance</div>
+											</div>
+											<div className="text-center">
+												<div className="w-16 h-16 rounded-full border-4 border-blue-500 flex items-center justify-center text-white font-bold mb-1">
+													98
+												</div>
+												<div className="text-xs text-zinc-400">
+													Accessibility
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</Card>
+					</motion.div>
+				</div>
+			</div>
+		</section>
+	);
 }
 
 // Main page component
 export default function Home() {
-    return (
-        <main className="flex min-h-screen flex-col bg-black">
-            <HeroSection />
-            <ClientLogosSection />
-        </main>
-    );
+	return (
+		<main className="flex min-h-screen flex-col bg-black">
+			<HeroSection />
+			<ClientLogosSection />
+			<ScaleFeaturesSection />
+		</main>
+	);
 }
